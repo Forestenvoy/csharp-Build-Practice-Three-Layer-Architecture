@@ -1,0 +1,12 @@
+version: '3.4'
+
+services:
+
+  mysql:
+    image: mysql:8.0.35-debian
+
+  practice.web:
+    # image: ${DOCKER_REGISTRY-}practiceweb
+    build:
+      context: .
+      dockerfile: src/Practice.Web/Dockerfile

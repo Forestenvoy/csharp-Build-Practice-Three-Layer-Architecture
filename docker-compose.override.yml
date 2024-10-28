@@ -1,0 +1,18 @@
+version: '3.4'
+
+services:
+  mysql:
+    ports:
+      - "6000:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=P@ssw0rd
+
+  practice.web:
+    env_file:
+      - compose.local.env
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "43750:43750"
+    depends_on:
+      - mysql
