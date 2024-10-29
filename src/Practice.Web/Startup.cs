@@ -5,6 +5,8 @@ using Serilog;
 using Practice.Common;
 using Practice.Common.ViewModels;
 using Practice.Web.Configuration;
+using Practice.Repository;
+using Microsoft.AspNetCore.DataProtection;
 
 namespace Practice.Web
 {
@@ -46,7 +48,25 @@ namespace Practice.Web
                 });
 
             services.AddCustomSwaggerGen();
+
+            services.AddMySqlDatabase(Configuration);
+
+            ConfigureService(services);
         }
+
+        private void ConfigureService(IServiceCollection services)
+        {
+            services.AddDataProtection()
+                .SetApplicationName("Practice.Web")
+                //.PersistKeysToFileSystem(new DirectoryInfo(@"./Auth/dataprotection-persistkeys"))
+                .PersistKeysToDbContext<PracticeDbContext>()
+                .AddKeyManagementOptions(options =>
+                {
+                    options.NewKeyLifetime = new TimeSpan(365 * 3, 0, 0, 0);
+                    options.AutoGenerateKeys = true;
+                });
+        }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -54,12 +74,12 @@ namespace Practice.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c =>
+                app.UseSwaggerUI(options =>
                 {
-                    c.SwaggerEndpoint($"/swagger/{SwaggerConst.BackendDocs}/swagger.json",
+                    options.SwaggerEndpoint($"/swagger/{SwaggerConst.BackendDocs}/swagger.json",
                         "Practice.Web v1 for Backend");
 
-                    c.SwaggerEndpoint($"/swagger/{SwaggerConst.FrontendDocs}/swagger.json",
+                    options.SwaggerEndpoint($"/swagger/{SwaggerConst.FrontendDocs}/swagger.json",
                         "Practice.Web v1 for Frontend");
                 });
             }

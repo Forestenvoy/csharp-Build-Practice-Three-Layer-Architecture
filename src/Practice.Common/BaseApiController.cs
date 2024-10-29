@@ -15,7 +15,6 @@ namespace Practice.Common
             Logger = logger;
         }
 
-
         /// <summary>
         /// 操作成功
         /// </summary>
@@ -26,7 +25,6 @@ namespace Practice.Common
             return Json(new ResponseModel(ResponseCode.SUCCESS, message));
         }
 
-
         /// <summary>
         /// 非法參數
         /// </summary>
@@ -36,7 +34,6 @@ namespace Practice.Common
         {
             return Json(new ResponseModel(ResponseCode.BAD_PARAMS, message));
         }
-
 
         /// <summary>
         /// 非法參數
@@ -54,7 +51,6 @@ namespace Practice.Common
             });
         }
 
-
         /// <summary>
         /// 失敗
         /// </summary>
@@ -65,7 +61,6 @@ namespace Practice.Common
             return Json(new ResponseModel(ResponseCode.FAIL, message));
         }
 
-
         /// <summary>
         /// 系統錯誤
         /// </summary>
@@ -75,7 +70,6 @@ namespace Practice.Common
         {
             return Json(new ResponseModel(ResponseCode.ERROR, message));
         }
-
 
         /// <summary>
         /// 資料
@@ -93,7 +87,6 @@ namespace Practice.Common
                 Data = data
             });
         }
-
 
         /// <summary>
         /// 空的資料
@@ -173,7 +166,6 @@ namespace Practice.Common
             });
         }
 
-
         /// <summary>
         /// 自定義Code代碼
         /// </summary>
@@ -184,7 +176,6 @@ namespace Practice.Common
         {
             return Json(new ResponseModel(code, message));
         }
-
 
         /// <summary>
         /// 自定義Code代碼與資料

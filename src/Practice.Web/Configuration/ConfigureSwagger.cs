@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 using System.Reflection;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Extensions;
 using Unchase.Swashbuckle.AspNetCore.Extensions.Options;
