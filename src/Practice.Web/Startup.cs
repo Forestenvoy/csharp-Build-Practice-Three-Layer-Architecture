@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.DataProtection;
 using Newtonsoft.Json;
 using Serilog;
 using Practice.Common;
 using Practice.Common.ViewModels;
 using Practice.Web.Configuration;
 using Practice.Repository;
-using Microsoft.AspNetCore.DataProtection;
+using Practice.Web.Middlewares;
 
 namespace Practice.Web
 {
@@ -87,6 +88,8 @@ namespace Practice.Web
             app.UseRouting();
 
             app.UseSerilogRequestLogging();
+
+            app.UseMiddleware<GlobalErrorHandler>();
 
             app.UseEndpoints(endpoints =>
             {
