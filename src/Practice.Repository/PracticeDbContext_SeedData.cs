@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Practice.Repository.Entity;
+using Practice.Repository.Entities;
 
 namespace Practice.Repository
 {

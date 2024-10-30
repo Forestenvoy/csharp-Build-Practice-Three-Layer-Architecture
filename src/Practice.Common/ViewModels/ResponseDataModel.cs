@@ -3,7 +3,7 @@
 namespace Practice.Common.ViewModels
 {
     /// <summary>
-    /// 包含資料的ViewModel
+    /// 包含資料的 ViewModel
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class ResponseDataModel<T> : ResponseModel

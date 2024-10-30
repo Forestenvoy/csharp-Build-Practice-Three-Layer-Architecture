@@ -1,6 +1,6 @@
 ﻿using Practice.Common;
 
-namespace Practice.Repository.Entity
+namespace Practice.Repository.Entities
 {
     public class Admin : BaseEntity
     {

@@ -7,6 +7,7 @@ using Practice.Common.ViewModels;
 using Practice.Web.Configuration;
 using Practice.Repository;
 using Microsoft.AspNetCore.DataProtection;
+using Practice.Service.Implements;
 
 namespace Practice.Web
 {
@@ -50,7 +51,7 @@ namespace Practice.Web
             services.AddCustomSwaggerGen();
 
             services.AddMySqlDatabase(Configuration);
-
+            
             ConfigureService(services);
         }
 
@@ -65,8 +66,10 @@ namespace Practice.Web
                     options.NewKeyLifetime = new TimeSpan(365 * 3, 0, 0, 0);
                     options.AutoGenerateKeys = true;
                 });
-        }
 
+            // Web
+            services.AddScoped<ProductService>();
+        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

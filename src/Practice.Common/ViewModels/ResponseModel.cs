@@ -3,7 +3,7 @@
 namespace Practice.Common.ViewModels
 {
     /// <summary>
-    /// 基本的ViewModel
+    /// 基本的 ViewModel
     /// </summary>
     public class ResponseModel
     {
