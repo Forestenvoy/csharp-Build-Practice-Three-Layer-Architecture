@@ -28,7 +28,7 @@ namespace Practice.Web.Middlewares
             }
         }
 
-        private async Task HandleExceptionAsync(HttpContext context)
+        private static async Task HandleExceptionAsync(HttpContext context)
         {
             context.Response.StatusCode = StatusCodes.Status200OK;
             context.Response.ContentType = "application/json";
