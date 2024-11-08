@@ -9,9 +9,9 @@ ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
 FROM mcr.microsoft.com/dotnet/sdk:8.0.401-1-alpine3.19 AS build
 WORKDIR /src
 COPY ["src/Practice.Web/Practice.Web.csproj", "Practice.Web/"]
+COPY ["src/Practice.Application/Practice.Application.csproj", "Practice.Application/"]
 COPY ["src/Practice.Common/Practice.Common.csproj", "Practice.Common/"]
-COPY ["src/Practice.Repository/Practice.Repository.csproj", "Practice.Repository/"]
-COPY ["src/Practice.Service/Practice.Service.csproj", "Practice.Service/"]
+COPY ["src/Practice.Domain/Practice.Domain.csproj", "Practice.Domain/"]
 RUN dotnet restore "Practice.Web/Practice.Web.csproj"
 COPY src .
 WORKDIR "/src/Practice.Web"

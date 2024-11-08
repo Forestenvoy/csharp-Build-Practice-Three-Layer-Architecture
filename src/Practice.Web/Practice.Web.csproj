@@ -25,7 +25,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Practice.Common\Practice.Common.csproj" />
     <ProjectReference Include="..\Practice.Repository\Practice.Repository.csproj" />
-    <ProjectReference Include="..\Practice.Service\Practice.Service.csproj" />
   </ItemGroup>
 
 </Project>
