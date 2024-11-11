@@ -18,22 +18,8 @@ namespace Practice.Repository.Persistence
 
         public virtual DbSet<DataProtectionKey> DataProtectionKeys { get; set; }
 
-        // Test
+        // 管理員
         public virtual DbSet<Admin> Admins { get; set; }
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            // 設定最後修改時間 
-            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
-            {
-                if (entry.State == EntityState.Modified)
-                {
-                    entry.Entity.SetLastModified();
-                }
-            }
-
-            return base.SaveChangesAsync(cancellationToken);
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -70,6 +56,29 @@ namespace Practice.Repository.Persistence
             // 種子資料
             Seed(modelBuilder);
         }
+
+        ///// <summary>
+        ///// SaveChangesAsync 擴展
+        ///// </summary>
+        ///// <remarks>
+        ///// 檢查 追蹤狀態且是繼承於 AuditableEntity 的實體，並且狀態是修改的，統一設定最後修改時間
+        ///// 廣義上任何欄位變動都算，所以斟酌使用，因為有些表不是每個欄位的變動都算在資料異動裡面
+        ///// </remarks>
+        ///// <param name="cancellationToken"></param>
+        ///// <returns></returns>
+        //public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        //{
+        //    // 設定最後修改時間 
+        //    foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+        //    {
+        //        if (entry.State == EntityState.Modified)
+        //        {
+        //            entry.Entity.SetLastModified();
+        //        }
+        //    }
+
+        //    return base.SaveChangesAsync(cancellationToken);
+        //}
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 

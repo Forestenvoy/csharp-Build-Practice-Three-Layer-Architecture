@@ -7,7 +7,7 @@ using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace Practice.Repository.Persistence
 {
-    public static class DependencyInjection
+    public static class ConfigureDatabase
     {
         public static IServiceCollection AddMySqlDatabase(this IServiceCollection services, IConfiguration configuration)
         {

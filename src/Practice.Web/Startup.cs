@@ -8,6 +8,7 @@ using Practice.Common.ViewModels;
 using Practice.Web.Configuration;
 using Practice.Web.Middlewares;
 using Practice.Repository.Persistence;
+using Practice.Application.Services;
 
 namespace Practice.Web
 {
@@ -66,6 +67,9 @@ namespace Practice.Web
                     options.NewKeyLifetime = new TimeSpan(365 * 3, 0, 0, 0);
                     options.AutoGenerateKeys = true;
                 });
+
+            // Web
+            services.AddScoped<AdminService>();
         }
 
 

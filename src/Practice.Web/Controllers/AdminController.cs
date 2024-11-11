@@ -5,7 +5,6 @@ using Practice.Web.Configuration;
 using Practice.Common;
 using Practice.Common.ViewModels;
 
-
 namespace Practice.Web.Controllers
 {
     [Route("api/admin")]
@@ -18,10 +17,10 @@ namespace Practice.Web.Controllers
         {
         }
 
-        [HttpGet]
-        public async Task<ActionResult<ResponseModel>> Get()
+        [HttpPost("login")]
+        public async Task<ActionResult<ResponseModel>> Login()
         {
-            return Success();
+            return Success("Login success");
         }
     }
 }

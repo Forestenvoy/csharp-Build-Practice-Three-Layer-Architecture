@@ -40,7 +40,7 @@ namespace Practice.Web.Configuration
                 options.SwaggerDoc(SwaggerConst.FrontendDocs, new OpenApiInfo
                 {
                     Version = Version,
-                    Title = Assembly.GetExecutingAssembly().GetName().Name + " v1 for frontend",
+                    Title = Assembly.GetExecutingAssembly().GetName().Name + " v1 for Frontend",
                     Description = DocsDescription
                 });
 
