@@ -1,4 +1,6 @@
-﻿namespace Practice.Common
+﻿using Practice.Common;
+
+namespace Practice.Domain.Common
 {
     public abstract class BaseEntity
     {

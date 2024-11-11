@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Practice.Application\Practice.Application.csproj" />
     <ProjectReference Include="..\Practice.Common\Practice.Common.csproj" />
     <ProjectReference Include="..\Practice.Repository\Practice.Repository.csproj" />
   </ItemGroup>

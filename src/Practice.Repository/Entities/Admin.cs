@@ -1,8 +1,8 @@
-﻿using Practice.Common;
+﻿using Practice.Repository.Common;
 
-namespace Practice.Repository.Entity
+namespace Practice.Repository.Entities
 {
-    public class Admin : BaseEntity
+    public class Admin : AuditableEntity
     {
         /// <summary>
         /// 帳號

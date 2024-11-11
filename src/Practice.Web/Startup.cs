@@ -6,8 +6,8 @@ using Serilog;
 using Practice.Common;
 using Practice.Common.ViewModels;
 using Practice.Web.Configuration;
-using Practice.Repository;
 using Practice.Web.Middlewares;
+using Practice.Repository.Persistence;
 
 namespace Practice.Web
 {

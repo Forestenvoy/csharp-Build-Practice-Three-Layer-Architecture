@@ -5,7 +5,7 @@ using Serilog;
 using MySqlConnector;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
-namespace Practice.Repository
+namespace Practice.Repository.Persistence
 {
     public static class DependencyInjection
     {
@@ -41,7 +41,7 @@ namespace Practice.Repository
 
         private static void InitializeDatabase(IConfiguration configuration, IServiceCollection services)
         {
-            if (configuration.GetValue<bool>("InitializeDatabase", false))
+            if (configuration.GetValue("InitializeDatabase", false))
             {
                 Log.Information($"InitializeDatabase is 'true', 若DB未建立則自動建立DB與TABLE");
 

@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
-using Practice.Repository.Entity;
+using Practice.Repository.Entities;
+using Practice.Repository.Common;
 
-namespace Practice.Repository
+namespace Practice.Repository.Persistence
 {
     public partial class PracticeDbContext : DbContext, IDataProtectionKeyContext
     {
@@ -19,7 +20,20 @@ namespace Practice.Repository
 
         // Test
         public virtual DbSet<Admin> Admins { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            // 設定最後修改時間 
+            foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+            {
+                if (entry.State == EntityState.Modified)
+                {
+                    entry.Entity.SetLastModified();
+                }
+            }
+
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,36 +51,18 @@ namespace Practice.Repository
                     .HasMaxLength(256)
                     .IsRequired();
 
-                entity.Property(e => e.AddTime)
+                entity.Property(e => e.Create)
                     .HasColumnType("timestamp(3)")
-                    .HasConversion(e => e, e => DateTime.SpecifyKind(e, DateTimeKind.Utc));
+                    .HasConversion(
+                        e => e, 
+                        e => DateTime.SpecifyKind(e, DateTimeKind.Utc));
 
-                entity.Property(e => e.UpdateTime)
+                entity.Property(e => e.LastModified)
                     .IsConcurrencyToken()
                     .HasColumnType("timestamp(3)")
-                    .HasConversion(e => e, e => DateTime.SpecifyKind(e, DateTimeKind.Utc));
-            });
-
-            modelBuilder.Entity<Product>(entity =>
-            {
-                entity.Property(e => e.Name)
-                    .HasMaxLength(100)
-                    .IsRequired();
-                
-                entity.Property(e => e.Price)
-                    .IsRequired();
-
-                entity.Property(e => e.Description)
-                    .HasMaxLength(500);
-
-                entity.Property(e => e.AddTime)
-                    .HasColumnType("timestamp(3)")
-                    .HasConversion(e => e, e => DateTime.SpecifyKind(e, DateTimeKind.Utc));
-
-                entity.Property(e => e.UpdateTime)
-                    .IsConcurrencyToken()
-                    .HasColumnType("timestamp(3)")
-                    .HasConversion(e => e, e => DateTime.SpecifyKind(e, DateTimeKind.Utc));
+                        .HasConversion(
+                        e => e,
+                        e => e.HasValue ? DateTime.SpecifyKind(e.Value, DateTimeKind.Utc) : null);
             });
 
             OnModelCreatingPartial(modelBuilder);
@@ -81,8 +77,7 @@ namespace Practice.Repository
         {
             if (!optionsBuilder.IsConfigured)
             {
-                string connectionString =
-                    "Server=mysql;User ID=root;Password=P@ssw0rd;Database=Practice;TreatTinyAsBoolean=False";
+                string connectionString ="Server=mysql;User ID=root;Password=P@ssw0rd;Database=Practice;TreatTinyAsBoolean=False";
 
                 ServerVersion serverVersion = ServerVersion.AutoDetect(connectionString);
 
