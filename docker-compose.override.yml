@@ -12,6 +12,7 @@ services:
       - compose.local.env
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:43750
     ports:
       - "43750:43750"
     depends_on:
